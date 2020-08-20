@@ -8,6 +8,7 @@ for Dir in "${repos[@]}"; do
   git clone http://github.com/hrr47-FEC-Bailey/$Dir/
   cd $Dir
   npm i
+  npm run-script build
   cd ..
 done
 

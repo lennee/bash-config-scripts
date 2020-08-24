@@ -9,7 +9,8 @@ FEC=false
 # FEC Helper function for getting team name is userPrompt runs
 promptTeam() {
   echo "What is your FEC organization name (as created/entered on GitHub)?"
-  read TEAM
+  read INPUT_TEAM
+  TEAM=$INPUT_TEAM
   FEC=true
 }
 
@@ -17,22 +18,23 @@ promptTeam() {
 promptUser() {
   # Prompt user for github handle
   echo "What is your GitHub username?"
-  read USER
+  read INPUT_USER
+  USER=$INPUT_USER
 
   # Prompt user for Cohort id
   echo "What is your COHORT ID? (i.e hrr47)"
-  read COHORT
+  read INPUT_COHORT
+  COHORT=$INPUT_COHORT
 
   # Prompt user on whether they have started/completed FEC
-  echo "Have you started or completed FEC? (y[es] / n[o])"
-  # Tells user to respond with y/n if invalid input
-  select yn in "Yes" "No"
-  case $yn in
-    # If yes, run promptTeam helper
-    Yes ) promptTeam;;
-    # If no, set FEC to false
-    No ) FEC=false;;
-  esac
+  while true; do
+    read -p "Have you started or completed FEC? (y[es] / n[o])" yn
+    case $yn in
+        [Yy]* ) promptTeam; break;;
+        [Nn]* ) FEC=false;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done
 }
 
 # If the three required options aren't included in prompt, run promptUser

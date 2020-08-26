@@ -17,7 +17,7 @@ promptFECTeam() {
 }
 
 promptSDCTeam() {
-  echo "What is your FEC organization name (as created/entered on GitHub)?"
+  echo "What is your SDC organization name (as created/entered on GitHub)?"
   read INPUT_SDC_TEAM
   SDCTEAM=$INPUT_SDC_TEAM
   SDC=true

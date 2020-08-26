@@ -5,6 +5,8 @@
 1. run `chmod +x clone-hr.sh`
 1. Run in either no-prompt mode or prompt mode (see below for details).
 
+##### NOTE: When the script runs, you may be asked once again for your GitHub username as well as your password. This is not the script asking for those items, it is GitHub. Your password is never saved nor read by the bash script itself and the password requirement is due to you attempting to download Hack Reactor created repos that are listed as private. GitHub needs to know you are an authorized individual and have permission to download those private repos; if you do not provide this info, the repos will not be downloaded and there is nothing that can be done about that.
+
 ## Run Modes
 ---
 ### No prompt mode:

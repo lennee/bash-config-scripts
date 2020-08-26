@@ -11,7 +11,7 @@
 ---
 ### No prompt mode:
 
-If you want the script to run without interupts or asking you any questions, run the following command **with all 3 options (with no brackets around the options)**:
+If you want the script to run without interupts or asking you any questions, run the following command **with all 4 options (with no brackets around the options)**:
 
 `./clone-hr.sh [USERNAME] [COHORT] [FEC] [SDC]`
 

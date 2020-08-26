@@ -3,15 +3,24 @@
 # REQUIRED SCRIPT VARIABLES
 USER="$1"
 COHORT="$2"
-TEAM="$3"
+FECTEAM="$3"
+SDCTEAM="$4"
 FEC=false
+SDC=false
 
 # FEC Helper function for getting team name is userPrompt runs
-promptTeam() {
+promptFECTeam() {
   echo "What is your FEC organization name (as created/entered on GitHub)?"
-  read INPUT_TEAM
-  TEAM=$INPUT_TEAM
+  read INPUT_FEC_TEAM
+  FECTEAM=$INPUT_FEC_TEAM
   FEC=true
+}
+
+promptSDCTeam() {
+  echo "What is your FEC organization name (as created/entered on GitHub)?"
+  read INPUT_SDC_TEAM
+  SDCTEAM=$INPUT_SDC_TEAM
+  SDC=true
 }
 
 # Creates a function to prompt user if no options are given when script is run
@@ -30,15 +39,25 @@ promptUser() {
   while true; do
     read -p "Have you started or completed FEC? (y[es] / n[o])" yn
     case $yn in
-        [Yy]* ) promptTeam; break;;
+        [Yy]* ) promptFECTeam; break;;
         [Nn]* ) FEC=false;;
+        * ) echo "Please answer yes or no.";;
+    esac
+  done
+  
+  # Prompt user on whether they have started/completed FEC
+  while true; do
+    read -p "Have you started or completed SDC? (y[es] / n[o])" yn
+    case $yn in
+        [Yy]* ) promptSDCTeam; break;;
+        [Nn]* ) SDC=false;;
         * ) echo "Please answer yes or no.";;
     esac
   done
 }
 
 # If the three required options aren't included in prompt, run promptUser
-if [ $# != 3 ]; then
+if [ $# != 4 ]; then
   promptUser
 fi
 
@@ -54,6 +73,7 @@ mkcd() {
 }
 
 # Pull Precourse Items
+cd ..
 mkcd Precourse
 clone seip2006-javascript-koans
 clone seip2006-testbuilder
@@ -106,15 +126,25 @@ cd ..
 # Function for cloning FEC repo using GitHub API for organzations
 mkFEC () {
   mkcd front-end-capstone
-  curl "https://api.github.com/orgs/$TEAM/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
+  curl "https://api.github.com/orgs/$FECTEAM/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
   cd ..
 }
 
 # If FEC is true or TEAM is not false then run mkFEC to clone org repos
-if [[ FEC == true || TEAM != false ]]; then
+if [[ FEC == true || FECTEAM != false ]]; then
   mkFEC
 fi
 
+mkSDC () {
+  mkcd system-design-capstone
+  curl "https://api.github.com/orgs/$SDCTEAM/repos?per_page=1000" | grep -o 'git@[^"]*' | xargs -L1 git clone
+  cd ..
+}
+
+# If FEC is true or TEAM is not false then run mkFEC to clone org repos
+if [[ SDC == true || SDCTEAM != false ]]; then
+  mkSDC
+fi
 
 # Pull Self-Assessments
 # Self Asssessments may need versioning for further COHORTs

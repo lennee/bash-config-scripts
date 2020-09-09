@@ -121,6 +121,12 @@ clone $COHORT-cowlist
 clone $COHORT-mini-apps-1
 cd ..
 
+# Bonus Sprints
+mkcd Bonus-Sprints
+clone $COHORT-d3
+clone $COHORT-recastly-redux
+git clone https://github.com/hyperledger-archives/education-cryptomoji
+
 # Week 6 Begins Front End Capstone
 
 # Function for cloning FEC repo using GitHub API for organzations
@@ -155,10 +161,13 @@ clone $COHORT-self-assessment-week-01-v3r
 clone $COHORT-self-assessment-week-02-v5r
 clone $COHORT-self-assessment-week-03-v7r
 clone $COHORT-self-assessment-week-04-v5r
+clone $COHORT-self-assessment-week-08-v1r
+clone $COHORT-self-assessment-week-09-v1r
+clone $COHORT-self-assessment-week-10-v1r
 cd ..
 
 # Pull Other Projects
 clone $COHORT-toy-problems
-clone $COHORT-d3
+
 
 
